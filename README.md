@@ -61,7 +61,7 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 
 5. 접속한 실습 환경에서 실습을 위한 Terraform, Ansible 소스를 git clone을 통해서 다운로드 받습니다.  
    **$는 입력하지 않습니다.**
-    ```
+    ```shell
     $ git clone https://github.com/mangdan/meetup-200118-iac.git
     ```
 
@@ -74,19 +74,18 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 > Terraform 설치와 관련해서는 아래 URL을 참고합니다.  
 > https://learn.hashicorp.com/terraform/getting-started/install.html
 
-Terraform 설치 확인
-
-    ```shell
-    $ terraform version
-    ```
+  * Terraform 설치 확인
+  ```shell
+  $ terraform version
+  ```
 
 ### 실습용 Terraform 소스 구조
 OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
 > 실습에서 사용되는 모듈은 compartment, vcn, compute입니다.
 
-    ```shell
-    $ cd meetup-200118-iac/terraform
-    ```
+  ```shell
+  $ cd meetup-200118-iac/terraform
+  ```
 
 제공되는 샘플은 루트 경로에 provider.tf, main.tf, vars.tf가 존재하고 이를 사용해서 하위 모듈을 실행하는 형태로 구성되어 있습니다.
 1. OCI provider 정의
@@ -133,36 +132,36 @@ OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
 ### Terraform Plan
 동일한 경로에서 다음과 같이 수행합니다. **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
 
-    ```shell
-    $ terraform plan -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+  ```shell
+  $ terraform plan -var-file="/home/{os_user}/.terraform/env/env.tfvars"
 
-    Plan: 14 to add, 0 to change, 0 to destroy.
-    ```
+  Plan: 14 to add, 0 to change, 0 to destroy.
+  ```
 
 ### Terraform Apply
 동일한 경로에서 다음과 같이 수행합니다. 마찬가지로 **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
 
-    ```shell
-    $ terraform apply -var-file="/home/{os_user}/.terraform/env/env.tfvars"
-    ```
+  ```shell
+  $ terraform apply -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+  ```
 
 실행하면 다음과 같이 Apply 실행에 대한 최종 Approve 여부를 물어봅니다. yes를 입력하고 엔터를 입력합니다.
 
 > apply와 destroy의 경우는 기본적으로 Approve 여부를 물어보는데, 실행시에 다음과 같이 auto-approve 옵션을 주면 Approve 단계를 건너뜁니다.  
 > terraform apply --auto-approve
 
-    ```shell
-    Do you want to perform these actions?
-      Terraform will perform the actions described above.
-      Only 'yes' will be accepted to approve.
+  ```shell
+  Do you want to perform these actions?
+    Terraform will perform the actions described above.
+    Only 'yes' will be accepted to approve.
 
-      Enter a value: yes
-    ```
+    Enter a value: yes
+  ```
 
 생성이 완료되면 다음과 같은 메시지를 볼 수 있습니다.
-    ```shell
-    Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
-    ```
+  ```shell
+  Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
+  ```
 
 ### OCI Console에서 생성된 Resource 확인
 1. 다음 주소로 OCI Console에 접속합니다.
@@ -200,14 +199,14 @@ OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
 
 Ansible은 Python 기반으로 개발된 오픈소스로 Python2(2.7) 혹은 Python3(3.5+)를 필요로 합니다. 실습 환경에는 이미 Python2가 설치되어 제공되고 있으며, Python Package Manager인 pip와 Python 가상환경 (virtualenv)에서 실습을 위한 Python virtualenv가 설치되어 제공됩니다. 
 
-python, pip, virtualenv 설치 확인
-```shell
-$ python --verion
+  * python, pip, virtualenv 설치 확인
+    ```shell
+    $ python --verion
 
-$ pip --version
+    $ pip --version
 
-$ virtualenv --version
-```
+    $ virtualenv --version
+    ```
 
 ### Python virtualenv 생성 및 Ansible, OCI Python SDK 설치
 
@@ -279,7 +278,7 @@ Ansible OCI Module은 Ansible Galaxy에서 Role로 제공되고 있으며, GitHu
     },
     ```
 
-4. 위에서 확인한 Compartment명을 이용해서 해당 Host에 Ping 테스트를 수행합니다. 여기서 **{compartment}**는 위에서 확인한 **meetup-compartment-숫자**로 대체한 후 실행합니다.
+4. 위에서 확인한 Compartment명을 이용해서 해당 Host에 Ping 테스트를 수행합니다. 여기서 **{compartment}** 는 위에서 확인한 **meetup-compartment-숫자**로 대체한 후 실행합니다.
 
     대상 서버에 접속할때마다 key를 입력하지 않도록 known_hosts에 등록하기 위해 yes를 입력하는 프롬프트가 나오는데, 아래와 같이 환경 변수를 추가하면 체크하지 않고 넘어갑니다.
     ```shell
@@ -390,33 +389,34 @@ OCI Compute (Linux)에 Nginx + PHP-FPM + MariaDB + Wordpress 조합의 환경을
     ```
 
 4. 성공적으로 완료되면 다음과 같이 변경된 구성의 개수(41개)를 확인할 수 있습니다.
-    ```shell
-    PLAY RECAP ************************************************************************************************************
-140.238.18.xxx             : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-140.238.3.xx               : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+    ```
+    PLAY RECAP *****************************************************************************************************
+    140.238.18.xxx             : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+    140.238.3.xx               : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     ```
 
 5. 설치된 Wordpress에 접속해봅니다. 두 개의 Compute Instance를 모두 확인해봅니다.
     > 구성 화면에서 간단히 사이트 이름, 관리자 ID, 이메일, 패스워드를 입력하여 완료하면 Wordpress의 기본 화면을 볼 수 있습니다.
 
-    * 1번 Instance의 Wordpress 구성 화면 (영어 버전)
-      ![](images/wordpress-config-en.png)
+  * 1번 Instance의 Wordpress 구성 화면 (영어 버전)  
+    ![](images/wordpress-config-en.png)
 
-    * 2번 Instance의 Wordpress 구성 완료 화면 (한국어 버전)  
-      ![](images/wordpress-main-ko.png)
+  * 2번 Instance의 Wordpress 구성 완료 화면 (한국어 버전)  
+    ![](images/wordpress-main-ko.png)
 
 ### Terraform Destroy
 구성한 모든 Compute Instance와 VCN을 삭제합니다.
 
-  1. terraform 폴더로 이동
-    ```shell
-    $ (oci-ansible) cd ~/meetup-200118-iac/terraform 
-    ```
+1. terraform 폴더로 이동
+  ```shell
+  $ (oci-ansible) cd ~/meetup-200118-iac/terraform 
+  ```
   
-  2. Terrafory Destroy 실행
-    ```shell
-    $ (oci-ansible) terraform destroy -var-file="/home/user1/.terraform/env/env.tfvars" --auto-approve
-    ```
+2. Terrafory Destroy 실행
+
+  ```shell
+  $ (oci-ansible) terraform destroy -var-file="/home/user1/.terraform/env/env.tfvars" --auto-approve
+  ```
 
 </details>
 
@@ -505,6 +505,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
 
 5. 실행하면 Compartment가 생성되며, 생성된 결과가 다음과 같이 출력됩니다. 아래 id의 값을 메모합니다.
     > 아래 이미지에서 출력된 compartment_ocid는 생성된 compartment의 상위 ocid입니다. 생성된 compartment_ocid는 id의 값입니다.
+
     ![](images/ansible_compartment_result.png)
     
 
@@ -557,24 +558,26 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
     ```
 
 7. ADW 프로비저닝을 위해 다음과 같이 Ansible Playbook을 실행합니다. **{compartment_ocid}** 는 위에서 생성한 Compartment의 id로 대체합니다.
-  ```shell
-  $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t create_adw -e "compartment_ocid={compartment_ocid}"
-  ```
+    ```shell
+    $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t create_adw -e "compartment_ocid={compartment_ocid}"
+    ```
 
-  예시입니다.
-  ```shell
-  $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t create_adw -e "compartment_ocid=ocid1.compartment.oc1..aaaaaaaau6jmp6bjbn35hjcgzfljvhkpo4daidyn2d..."
-  ```
+    예시입니다.  
+    ```shell
+    $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t create_adw -e "compartment_ocid=ocid1.compartment.oc1..aaaaaaaau6jmp6bjbn35hjcgzfljvhkpo4daidyn2d..."
+    ```
 
-  생성되면 다음과 같은 결과를 확인할 수 있습니다. 생성된 ADW의 OCID를 메모합니다. (삭제 시 필요)
-  ![](images/ansible_adw_created_id.png)
+    생성되면 다음과 같은 결과를 확인할 수 있습니다. 생성된 ADW의 OCID를 메모합니다. (삭제 시 필요)  
+
+    ![](images/ansible_adw_created_id.png)
 
 5. 생성된 ADW 인스턴스 확인
   OCI Console에 로그인 한 후 다음 페이지로 이동하여 생성된 ADW 인스턴스를 확인합니다.
-  > 좌측 상단 햄버거 버튼 > Autonomous Data Warehouse > 좌측 **ansible-compartment** 선택
+    > 좌측 상단 햄버거 버튼 > Autonomous Data Warehouse > 좌측 **ansible-compartment** 선택
 
-  생성된 ADW 인스턴스
-  ![](images/ansible-adw-created.png)
+    생성된 ADW 인스턴스  
+
+    ![](images/ansible-adw-created.png)
 
 ### ADW 인스턴스 삭제
 
@@ -589,6 +592,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
   ```
 
   ADW 인스턴스 삭제 확인
+  
   ![](images/ansible-adw-deleted.png)
 
 </details>
