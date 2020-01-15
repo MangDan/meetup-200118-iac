@@ -75,9 +75,9 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 > https://learn.hashicorp.com/terraform/getting-started/install.html
 
   * Terraform 설치 확인
-  ```shell
-  $ terraform version
-  ```
+    ```shell
+    $ terraform version
+    ```
 
 ### 실습용 Terraform 소스 구조
 OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
