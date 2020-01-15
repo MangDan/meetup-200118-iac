@@ -61,30 +61,31 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 
 5. 접속한 실습 환경에서 실습을 위한 Terraform, Ansible 소스를 git clone을 통해서 다운로드 받습니다.  
    **$는 입력하지 않습니다.**
-  ```
-  $ git clone https://github.com/mangdan/meetup-200118-iac.git
-  ```
+    ```
+    $ git clone https://github.com/mangdan/meetup-200118-iac.git
+    ```
 
 <details>
 <summary>
 <font size=4>Terraform with OCI (Hands-On)</font>
 </summary>
 
-> 실습 환경에는 이미 Terraform이 설치되어 제공됩니다. Terraform 설치와 관련해서는 아래 URL을 참고합니다.  
+> 실습 환경에는 이미 Terraform이 설치되어 제공됩니다.  
+> Terraform 설치와 관련해서는 아래 URL을 참고합니다.  
 > https://learn.hashicorp.com/terraform/getting-started/install.html
 
 Terraform 설치 확인
-```shell
-$ terraform version
-```
+    ```shell
+    $ terraform version
+    ```
 
 ### 실습용 Terraform 소스 구조
 OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
 > 실습에서 사용되는 모듈은 compartment, vcn, compute입니다.
 
-```shell
-$ cd meetup-200118-iac/terraform
-```
+    ```shell
+    $ cd meetup-200118-iac/terraform
+    ```
 
 제공되는 샘플은 루트 경로에 provider.tf, main.tf, vars.tf가 존재하고 이를 사용해서 하위 모듈을 실행하는 형태로 구성되어 있습니다.
 1. OCI provider 정의
@@ -94,11 +95,9 @@ $ cd meetup-200118-iac/terraform
 
 ![](images/terraform_sample_structure.png)
 
-다음은 변수가 어떤식으로 할당되는지를 보여주는 그림입니다.
-
 > Terraform의 변수는 기본적으로 환경변수 혹은 tfvars 파일에 정의한 값이 할당되는데, 할당된 변수값은 같은 위치의 Block Type (resource, data등)에서 참조합니다. 따라서 상위 변수의 값을 하위 모듈에 다시 매핑을 해야 하며, 하위 모듈의 경우도 동일하게 변수를 가지고 있어야 합니다.
 
-변수가 매핑되는 순서입니다.
+변수가 사용되는 방식은 다음과 같습니다.
 1. env.tfvars에 정의된 값을 루트의 vars.tf에 할당
 2. 루트의 vars.tf를 main.tf, provider.tf에서 사용
 3. 루트의 main.tf에서 하위 모듈(compute, compartment, vcn)이 가지고 있는 vars.tf에 값을 전달
@@ -108,61 +107,61 @@ $ cd meetup-200118-iac/terraform
 
 
 ### Terraform Init
-provider.tf가 있는 위치에서 다음과 같이 init을 실행합니다. 이 작업은 provider에서 제공하는 terraform plugin을 OS환경에 맞게 다운로드 혹은 업데이트하며, 실행할 모듈의 정보에 대한 내용을 json파일로 생성합니다.
+이 작업은 provider에서 제공하는 terraform plugin을 OS환경에 맞게 다운로드 혹은 업데이트하며, 실행할 모듈의 정보에 대한 내용을 json파일로 생성합니다.
 
-```shell
-$ cd meetup-200118-iac/terraform
+1. provider.tf가 있는 위치에서 다음과 같이 init을 실행합니다.
+    ```shell
+    $ cd meetup-200118-iac/terraform
 
-$ terraform init
-```
+    $ terraform init
+    ```
 
-OCI Plugin과 Module 확인
-```shell
-$ tree .terraform
+2. OCI Plugin과 Module을 확인합니다.
+    ```shell
+    $ tree .terraform
 
-.terraform/
-├── modules
-│   └── modules.json
-└── plugins
-    └── linux_amd64
-        ├── lock.json
-        └── terraform-provider-random_v2.2.1_x4
-```
+    .terraform/
+    ├── modules
+    │   └── modules.json
+    └── plugins
+        └── linux_amd64
+            ├── lock.json
+            └── terraform-provider-random_v2.2.1_x4
+    ```
 
 ### Terraform Plan
 동일한 경로에서 다음과 같이 수행합니다. **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
 
-```shell
-$ terraform plan -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+    ```shell
+    $ terraform plan -var-file="/home/{os_user}/.terraform/env/env.tfvars"
 
-Plan: 14 to add, 0 to change, 0 to destroy.
-```
+    Plan: 14 to add, 0 to change, 0 to destroy.
+    ```
 
 ### Terraform Apply
 동일한 경로에서 다음과 같이 수행합니다. 마찬가지로 **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
 
-```shell
-$ terraform apply -var-file="/home/{os_user}/.terraform/env/env.tfvars"
-```
+    ```shell
+    $ terraform apply -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+    ```
 
 실행하면 다음과 같이 Apply 실행에 대한 최종 Approve 여부를 물어봅니다. yes를 입력하고 엔터를 입력합니다.
 
 > apply와 destroy의 경우는 기본적으로 Approve 여부를 물어보는데, 실행시에 다음과 같이 auto-approve 옵션을 주면 Approve 단계를 건너뜁니다.  
 > terraform apply --auto-approve
 
+    ```shell
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
 
-```shell
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-```
+      Enter a value: yes
+    ```
 
 생성이 완료되면 다음과 같은 메시지를 볼 수 있습니다.
-```shell
-Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
-```
+    ```shell
+    Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
+    ```
 
 ### OCI Console에서 생성된 Resource 확인
 1. 다음 주소로 OCI Console에 접속합니다.
