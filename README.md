@@ -245,7 +245,7 @@ Ansible은 Python 기반으로 개발된 오픈소스로 Python2(2.7) 혹은 Pyt
 Ansible OCI Module은 Ansible Galaxy에서 Role로 제공되고 있으며, GitHub에서도 다운로드 받을 수 있습니다. 본 실습에서는 Ansible Galaxy에서 다운로드 받아서 설치를 진행합니다.
 
 1. Ansible OCI Module 다운로드 (from Ansible Galaxy)
-    > 참고) OCI Ansible Module in Ansible Galaxy
+    > 참고) OCI Ansible Module in Ansible Galaxy  
     > https://galaxy.ansible.com/oracle/oci_ansible_modules
 
     ```
