@@ -74,7 +74,8 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 > Terraform 설치와 관련해서는 아래 URL을 참고합니다.  
 > https://learn.hashicorp.com/terraform/getting-started/install.html
 
-Terraform 설치 확인  
+Terraform 설치 확인
+
     ```shell
     $ terraform version
     ```
