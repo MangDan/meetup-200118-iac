@@ -62,7 +62,7 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 
 5. 접속한 실습 환경에서 실습을 위한 Terraform, Ansible 소스를 git clone을 통해서 다운로드 받습니다. ($는 입력하지 않습니다.)
 ```
-$ git clone https://github.com/MangDan/meetup-200118-iac.git
+$ git clone https://github.com/mangdan/meetup-200118-iac.git
 ```
 
 <details>
@@ -269,7 +269,7 @@ Ansible OCI Module은 Ansible Galaxy에서 Role로 제공되고 있으며, GitHu
     $ (oci-ansible) ansible-inventory -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py --list
     ```
 
-    아래와 같이 Compartment이름(meetup-compartment-숫자)과 하위 Host IP 주소를 확인할 수 있습니다.
+    실행하면 생성된 Compartment이름(meetup-compartment-숫자)과 하위 Host IP 주소를 확인할 수 있습니다.
     ```json
     "meetup-compartment-숫자": {
         "hosts": [
@@ -389,34 +389,52 @@ OCI Compute (Linux)에 Nginx + PHP-FPM + MariaDB + Wordpress 조합의 환경을
     $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py -l meetup-compartment-39626 site.yml
     ```
 
-3. 다음과 같이
+4. 성공적으로 완료되면 다음과 같이 변경된 구성의 개수(41개)를 확인할 수 있습니다.
+    ```shell
+    PLAY RECAP ************************************************************************************************************
+140.238.18.xxx             : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+140.238.3.xx               : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+    ```
+
+5. 설치된 Wordpress에 접속해봅니다. 두 개의 Compute Instance를 모두 확인해봅니다.
+    > 구성 화면에서 간단히 사이트 이름, 관리자 ID, 이메일, 패스워드를 입력하여 완료하면 Wordpress의 기본 화면을 볼 수 있습니다.
+
+    * 1번 Instance의 Wordpress 구성 화면 (영어 버전)
+      ![](images/wordpress-config-en.png)
+
+    * 2번 Instance의 Wordpress 구성 완료 화면 (한국어 버전)  
+      ![](images/wordpress-main-ko.png)
+
+### Terraform Destroy
+구성한 모든 Compute Instance와 VCN을 삭제합니다.
+
+  1. terraform 폴더로 이동
+    ```shell
+    $ (oci-ansible) cd ~/meetup-200118-iac/terraform 
+    ```
+  
+  2. Terrafory Destroy 실행
+    ```shell
+    $ (oci-ansible) terraform destroy -var-file="/home/user1/.terraform/env/env.tfvars" --auto-approve
+    ```
+
+</details>
 
 
+<details>
+<summary>
+<font size=4>선택) Ansible을 활용한 프로비저닝 (Provisioning)</font>
+</summary>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Ansible을 활용한 서버 프로비저닝 (Provisioning)
 OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
 
-1. 실습용 소스 다운로드
-    > git clone https://github.com/MangDan/Infrastructure-as-Code/ansible
+1. 실습용 Playbook
+    ```
+    $ cd meetup-200118-iac/oci
+
+    compartment.yml
+    adw.yml
+    ```
 
 2. tenancy_ocid 확인
     아래 제공되는 config파일에서 tenancy의 id를 확인하고 메모합니다.
@@ -433,7 +451,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
     ```
 
 3. 먼저 ADW를 생성하기 위한 Compartment를 생성합니다. 다음은 Compartment 생성을 위한 Playbook입니다.
-
+  
   * compartment.yml playbook 내용
     ```yml
     ---
@@ -470,21 +488,20 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
             msg: '{{ result }}'
           tags:
             - always
-    ...
     ```
 
-4. 아래의 스크립트를 실행합니다. **{{tenancy_ocid}}** 부분을 위에서 메모한 tenancy_ocid로 대체하여 실행합니다.
+4. 아래의 스크립트를 실행합니다. **{tenancy_ocid}** 부분을 위에서 메모한 tenancy_ocid로 대체하여 실행합니다.
 
     ```
-    $ ansible-playbook -i .ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py playbooks/compartment.yml -t create_compartment -e "{{ tenancy_ocid }}"
+    $ ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py playbooks/compartment.yml -t create_compartment -e "{tenancy_ocid}"
     ```
 
-5. 실행하면 Compartment가 생성되며, 생성된 결과가 다음과 같이 출렵됩니다. 아래 id의 값을 메모합니다.
+5. 실행하면 Compartment가 생성되며, 생성된 결과가 다음과 같이 출력됩니다. 아래 id의 값을 메모합니다.
 
     ![](images/ansible_compartment_result.png)
     
 
-6. Oracle Autonomous Data Warehouse를 위에서 생성한 Compartment에 생성합니다. 아래는 ADW를 생성하기 위한 Playbook입니다.
+6. Oracle Autonomous Data Warehouse를 위에서 생성한 Compartment에 생성합니다. 다음은 ADW를 생성하기 위한 Playbook입니다.
 
   * adw.yml playbook
     ```yml
@@ -530,18 +547,31 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
             msg: '{{ result }}'
           tags:
             - always
-    ...
     ```
 
-4. ADW 프로비저닝을 위해 다음과 같이 Ansible Playbook을 실행합니다.
+4. ADW 프로비저닝을 위해 다음과 같이 Ansible Playbook을 실행합니다. **{compartment_ocid}** 는 위에서 생성한 Compartment의 ID로 대체합니다.
   ```
-  $ ansible-playbook -i .ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py playbooks/adw.yml -t create_adw -e "compartment_id={compartment ID}"
+  $ ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py playbooks/adw.yml -t create_adw -e "compartment_id={compartment_ocid}"
   ```
+
+5. 생성된 ADW Instance 확인
+OCI Console에 로그인 한 후 다음 페이지로 이동하여 생성된 ADW 인스턴스를 확인합니다.
+> 
 
 </details>
 
-5. ADW Instance 확인
-https://console.ap-seoul-1.oraclecloud.com/?tenant={Tenancy명}
 
-제공된 ID/PW를 활용하여 접속, ADW 메뉴에서 생성된 ADW 인스턴스 확인
+
+
+
+
+
+
+
+
+
+
+
+
+
 
