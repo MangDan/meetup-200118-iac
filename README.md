@@ -428,9 +428,10 @@ OCI Compute (Linux)에 Nginx + PHP-FPM + MariaDB + Wordpress 조합의 환경을
 
 OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
 
-1. 실습용 Playbook
-    ```
-    $ cd meetup-200118-iac/oci
+### ADW 인스턴스 생성
+1. 실습용 Playbook 확인
+    ```shell
+    $ (oci-ansible) cd meetup-200118-iac/oci
 
     compartment.yml
     adw.yml
@@ -439,14 +440,14 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
 2. tenancy_ocid 확인
     아래 제공되는 config파일에서 tenancy의 id를 확인하고 메모합니다.
 
-    ```
-    $ cat ~/.oci/config
+    ```shell
+    $ (oci-ansible) cat ~/.oci/config
 
     [DEFAULT]
-    tenancy=ocid1.tenancy.oc1..aaaaaaaaczntdhqaqsnfxfykqymelumoplqe5d6amg7ecsaykku6ukiwc37q
-    user=ocid1.user.oc1..aaaaaaaaecuviw4zez73bajvj4a7ccdkxkpz7axmcu5yjobtqny3dw753nda
+    tenancy=ocid1.tenancy.oc1..aaaaaaaaczntdhqaqsnfxfykq.................
+    user=ocid1.user.oc1..aaaaaaaaecuviw4zez73bajvj4a7ccdkxkpz...........
     key_file=~/.oci/oci_api_key.pem
-    fingerprint=48:1a:98:8c:cd:f6:63:4b:fb:4d:8d:26:44:aa:37:f6
+    fingerprint=48:1a:98:8c:cd:f...............
     region=ap-seoul-1
     ```
 
@@ -458,11 +459,11 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
     # Compartment Module
     - name: Compartment Module
       connection: local
-      hosts: localhost
+      hosts: all
       tasks:
         - name: Create a compartment
           oci_compartment:
-            parent_compartment_id: '{{ tenancy_id }}'
+            parent_compartment_id: '{{ tenancy_ocid }}'
             name: ansible_compartment 
             description: Compartment for Ansible handson 
           register: result
@@ -470,14 +471,14 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
             - create_compartment
         - name: Delete compartment
           oci_compartment:
-            compartment_id: '{{ compartment_id }}'
+            compartment_id: '{{ compartment_ocid }}'
             state: absent
           register: result
           tags:
             - delete_compartment
         - name: Get details of a root compartment
           oci_compartment_facts:
-            compartment_id: '{{ tenancy_id }}'
+            compartment_id: '{{ tenancy_ocid }}'
             name: '{{ compartment_name }}'
             fetch_subcompartments: True 
           register: result
@@ -491,13 +492,19 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
     ```
 
 4. 아래의 스크립트를 실행합니다. **{tenancy_ocid}** 부분을 위에서 메모한 tenancy_ocid로 대체하여 실행합니다.
+    > 생성되는 Compartment명은 **ansible_compartment** 입니다.
 
+    ```shell
+    $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py compartment.yml -t create_compartment -e "tenancy_ocid={tenancy_ocid}"
     ```
-    $ ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py playbooks/compartment.yml -t create_compartment -e "{tenancy_ocid}"
+
+    예시입니다.
+    ```shell
+    $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansitory-script/oci_inventory.py compartment.yml -t create_compartment -e "tenancy_ocid=ocid1.tenancy.oc1..aaaaaaaagxn3didg4xptrk53xjrw3fvlvle5ma7a5s7vtk7vqbkru...."
     ```
 
 5. 실행하면 Compartment가 생성되며, 생성된 결과가 다음과 같이 출력됩니다. 아래 id의 값을 메모합니다.
-
+    > 아래 이미지에서 출력된 compartment_ocid는 생성된 compartment의 상위 ocid입니다. 생성된 compartment_ocid는 id의 값입니다.
     ![](images/ansible_compartment_result.png)
     
 
@@ -509,11 +516,11 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
     # Create Autonomous Data Warehouse
     - name: Autonomous Data Warehouse Module
       connection: local
-      hosts: localhost
+      hosts: all
       tasks:
         - name: Create Autonomous Data Warehouse
           oci_autonomous_data_warehouse:
-            compartment_id: '{{ compartment_id }}'
+            compartment_id: '{{ compartment_ocid }}'
             admin_password: 'WelCome123##'
             data_storage_size_in_tbs: 1
             cpu_core_count: 2
@@ -521,7 +528,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
             display_name: 'ansible-adw'
             license_model: 'LICENSE_INCLUDED'
             freeform_tags:
-              owner: 'dan.donghu.kim@gmail.com'
+              owner: 'meetup-200108-iac'
             wait: False
             state: 'present'
           register: result
@@ -530,14 +537,14 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
         # Delete Autonomous Data Warehouse
         - name: Delete Autonomous Data Warehouse
           oci_autonomous_data_warehouse:
-            autonomous_data_warehouse_id: '{{ adw_id }}'
+            autonomous_data_warehouse_id: '{{ adw_ocid }}'
             state: 'absent'
           register: result
           tags:
             - delete_adw
         - name: Get Aunonomous Data Warehouse details of compartment
           oci_autonomous_data_warehouse_facts:
-            compartment_id: '{{ compartment_id }}'
+            compartment_id: '{{ compartment_ocid }}'
           register: result
           tags:
             - get_adw_details
@@ -549,29 +556,39 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
             - always
     ```
 
-4. ADW 프로비저닝을 위해 다음과 같이 Ansible Playbook을 실행합니다. **{compartment_ocid}** 는 위에서 생성한 Compartment의 ID로 대체합니다.
-  ```
-  $ ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py playbooks/adw.yml -t create_adw -e "compartment_id={compartment_ocid}"
+7. ADW 프로비저닝을 위해 다음과 같이 Ansible Playbook을 실행합니다. **{compartment_ocid}** 는 위에서 생성한 Compartment의 id로 대체합니다.
+  ```shell
+  $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t create_adw -e "compartment_ocid={compartment_ocid}"
   ```
 
-5. 생성된 ADW Instance 확인
-OCI Console에 로그인 한 후 다음 페이지로 이동하여 생성된 ADW 인스턴스를 확인합니다.
-> 
+  예시입니다.
+  ```shell
+  $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t create_adw -e "compartment_ocid=ocid1.compartment.oc1..aaaaaaaau6jmp6bjbn35hjcgzfljvhkpo4daidyn2d..."
+  ```
+
+  생성되면 다음과 같은 결과를 확인할 수 있습니다. 생성된 ADW의 OCID를 메모합니다. (삭제 시 필요)
+  ![](images/ansible_adw_created_id.png)
+
+5. 생성된 ADW 인스턴스 확인
+  OCI Console에 로그인 한 후 다음 페이지로 이동하여 생성된 ADW 인스턴스를 확인합니다.
+  > 좌측 상단 햄버거 버튼 > Autonomous Data Warehouse > 좌측 **ansible-compartment** 선택
+
+  생성된 ADW 인스턴스
+  ![](images/ansible-adw-created.png)
+
+### ADW 인스턴스 삭제
+
+  **{adw_ocid}** 부분을 위에서 생성 후 메모한 ADW id로 대체한 후 아래와 같이 실행합니다.
+  ```shell
+  $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t delete_adw -e "adw_ocid={adw_ocid}"
+  ```
+
+  예시입니다.
+  ```shell
+  $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t delete_adw -e "adw_ocid=ocid1.autonomousdatabase.oc1.ap-seoul-1.abuwgljr2qtz4zc3elukxo6tztbwknupj6zf4oe234vsfutibsb2nggtx2dq"
+  ```
+
+  ADW 인스턴스 삭제 확인
+  ![](images/ansible-adw-deleted.png)
 
 </details>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
