@@ -130,17 +130,62 @@ $ tree .terraform
 ```
 
 ### Terraform Plan
-동일한 경로에서 다음과 같이 수행합니다.
+동일한 경로에서 다음과 같이 수행합니다. **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
 
 ```shell
-$ terraform plan -var-file="~/.terraform/env/env.tfvars"
+$ terraform plan -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+
+Plan: 14 to add, 0 to change, 0 to destroy.
 ```
 
+### Terraform Apply
+동일한 경로에서 다음과 같이 수행합니다. 마찬가지로 **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
+
+```shell
+$ terraform apply -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+```
+
+실행하면 다음과 같이 Apply 실행에 대한 최종 Approve 여부를 물어봅니다. yes를 입력하고 엔터를 입력합니다.
+
+> apply와 destroy의 경우는 기본적으로 Approve 여부를 물어보는데, 실행시에 다음과 같이 auto-approve 옵션을 주면 Approve 단계를 건너뜁니다.  
+> terraform apply --auto-approve
 
 
+```shell
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
 
+  Enter a value: yes
+```
 
+생성이 완료되면 다음과 같은 메시지를 볼 수 있습니다.
+```shell
+Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
+```
 
+### OCI Console에서 생성된 Resource 확인
+1. 다음 주소로 OCI Console에 접속합니다.
+    > https://console.ap-seoul-1.oraclecloud.com
+
+2. 실습을 위해 각자 제공된 Cloud Tenant(e.g. meetup101)를 입력한 후 **Continue** 를 클릭합니다.
+    ![](images/oci_console_login_tenancy.png)
+
+3. 실습을 위해 각자 제공된 OCI 계정(ID/PW)을 입력한 후 **Sign In** 을 클릭합니다.
+    ![](images/oci_console_login_user.png)
+
+4. Compute Instance 확인을 위해 다음 페이지로 이동합니다.
+    > 좌측 상단 햄버거 메뉴 > Compute > Instances
+    ![](images/oci_menu_compute_instances.png)
+
+5. 생성된 Compartment와 Instance를 확인합니다.
+    ![](images/oci_compute_created.png)
+
+6. 마찬가지로 생성된 VCN 확인을 위해 다음 페이지로 이동합니다.
+    > 좌측 상단 햄버거 메뉴 > Networking > Virtual Cloud Networks
+
+7. 생성된 VCN을 확인합니다.
+    ![](images/oci_vcn_created.png)
 
 </details>
 
@@ -149,59 +194,46 @@ $ terraform plan -var-file="~/.terraform/env/env.tfvars"
 <font size=4>Ansible with OCI (Hands-On)</font>
 </summary>
 
-* Configuration (후보군)
-  * apache(nginx) + php + fpm
-  * database (oracle, mongo...)
-  * was (weblogic, jboss, tomcat)
-  * ansible awx
-  * kafka
-  * monitoring (kibana, logstat, prometheus)
-  * system infra (docker, kubernetes)
-* Provisioning
-  * ADW
-
 ### 실습 환경 (그림 한장)
 * Ansible Control Server
 * Ansible Target Server
 
-### 실습 환경 구성
-1. RSA Key Pair 다운로드
+Ansible은 Python 기반으로 개발된 오픈소스로 Python2(2.7) 혹은 Python3(3.5+)를 필요로 합니다. 실습 환경에는 이미 Python2가 설치되어 제공되고 있으며, Python Package Manager인 pip와 Python 가상환경 (virtualenv)에서 실습을 위한 Python virtualenv가 설치되어 제공됩니다. 
 
-2. Ansible Control Server 접속
+python, pip, virtualenv 설치 확인
+```shell
+$ python --verion
 
-    #### Windows (Putty)
-    Putty를 통해 접속 방법 가이드
+$ pip --version
 
-    #### macOS Terminal
-    ```
-    $ ssh -i ~/.ssh/id_rsa user1@132.145.95.114
-    ```
+$ virtualenv --version
+```
 
-3. python, pip, virtualenv 설치 확인
-    ```
-    $ python --verion
+### Python virtualenv 생성 및 Ansible, OCI Python SDK 설치
 
-    $ pip --version
-
-    $ virtualenv --version
-    ```
-
-4. virtualenv 환경 생성 및 가상환경 실행
-    ```
+1. virtualenv 환경 생성 및 가상환경을 실행합니다.
+    ```shell
     $ virtualenv oci-ansible
 
     $ source ~/oci-ansible/bin/activate
     ```
 
-5. Python 가상환경에 ansible 설치 및 확인
-    ```
-    $ (oci-ansible) $ pip install ansible
-
-    $ (oci-ansible) $ ansible --version
+    가상환경을 실행하면 Shell Prompt가 다음과 같이 변경됩니다.
+    ```shell
+    $ (oci-ansible)
     ```
 
-6. OCI Python SDK 설치
-    Ansible OCI Module에서는 OCI Python SDK를 사용하여 OCI에 접근합니다. 따라서 Ansible OCI Module을 사용하기 위해서는 OCI Python SDK 설치가 필요합니다.
+2. Python 가상환경에 ansible 설치 및 설치 확인을 합니다.
+    > $ (oci-ansible)은 입력하지 않습니다.
+
+    ```shell
+    $ (oci-ansible) pip install ansible
+
+    $ (oci-ansible) ansible --version
+    ```
+
+3. OCI Python SDK를 설치합니다. 
+    > Oracle에서 제공하는 OCI Ansible Module은 내부적으로 OCI에서 제공하는 Python SDK를 사용합니다. 따라서 해당 Module을 사용하기 위해 OCI Python SDK를 설치해야 합니다.
 
     ```
     $ (oci-ansible) pip install oci
@@ -211,54 +243,69 @@ $ terraform plan -var-file="~/.terraform/env/env.tfvars"
 Ansible OCI Module은 Ansible Galaxy에서 Role로 제공되고 있으며, GitHub에서도 다운로드 받을 수 있습니다. 본 실습에서는 Ansible Galaxy에서 다운로드 받아서 설치를 진행합니다.
 
 1. Ansible OCI Module 다운로드 (from Ansible Galaxy)
+    > 참고) OCI Ansible Module in Ansible Galaxy
+    > https://galaxy.ansible.com/oracle/oci_ansible_modules
+
     ```
     $ (oci-ansible) ansible-galaxy install oracle.oci_ansible_modules
     ```
 
-<details>
- <summary>참고) Ansible OCI Module from GitHub</summary>
+    <details>
+    <summary>참고) Ansible OCI Module from GitHub</summary>
 
- ```
-$ (oci-ansible) git clone https://github.com/oracle/oci-ansible-modules.git
- ```
-
-</details>
-
-2. Ansible OCI Module 설치
     ```
+    $ (oci-ansible) git clone https://github.com/oracle/oci-ansible-modules.git
+    ```
+
+    </details>
+
+2. 다운로드 받은 Ansible OCI Module을 Python Package로 설치합니다. 일반적으로 Python 인터프리터의 site-packages 디렉토리에 설치됩니다.
+    ```shell
     $ (oci-ansible) ~/.ansible/roles/oracle.oci_ansible_modules/install.py
     ```
 
-3. Ansible OCI Module에서 제공하는 Dynamic Inventory를 사용하여 접속 테스트
-    ```
-    $ (oci-ansible) ansible-inventory -i .ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py --list
+3. Ansible OCI Module에서 제공하는 Dynamic Inventory를 사용하여 접속을 테스트합니다.
+    ```shell
+    $ (oci-ansible) ansible-inventory -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py --list
     ```
 
-    아래와 같이 Compartment이름과 하위 Host IP 주소를 확인할 수 있습니다.
-    ```
-    "meetup-compartment-111": {
+    아래와 같이 Compartment이름(meetup-compartment-숫자)과 하위 Host IP 주소를 확인할 수 있습니다.
+    ```json
+    "meetup-compartment-숫자": {
         "hosts": [
-            "140.238.1.142"
+            "140.238.0.xx", 
+            "140.238.13.xxx"
         ]
+    },
+    ```
+
+4. 위에서 확인한 Compartment명을 이용해서 해당 Host에 Ping 테스트를 수행합니다. 여기서 **{compartment}**는 위에서 확인한 **meetup-compartment-숫자**로 대체한 후 실행합니다.
+
+    대상 서버에 접속할때마다 key를 입력하지 않도록 known_hosts에 등록하기 위해 yes를 입력하는 프롬프트가 나오는데, 아래와 같이 환경 변수를 추가하면 체크하지 않고 넘어갑니다.
+    ```shell
+    $ (oci-ansible) export ANSIBLE_HOST_KEY_CHECKING=False
+    ```
+
+    ```shell
+    $ (oci-ansible) ansible -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py {compartment} -u opc -m ping --private-key=~/.ssh/id_rsa
+    ```
+
+    예시입니다.
+    ```shell
+    $ (oci-ansible) ansible -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py meetup-compartment-39626 -u opc -m ping --private-key=~/.ssh/id_rsa
+    ```
+
+    PING 테스트 결과입니다.
+    ```
+    140.238.0.xx | SUCCESS => {
+        "ansible_facts": {
+            "discovered_interpreter_python": "/usr/bin/python"
+        }, 
+        "changed": false, 
+        "ping": "pong"
     }
-    ```
 
-4. 위에서 확인한 Compartment명을 이용해서 해당 Host에 Ping 테스트를 수행합니다.
-    ```
-    ansible -i .ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py {compartment명} -u {사용자명} -m ping --private-key=~/.ssh/id_rsa
-    ```
-
-    접속할때마다 key를 입력하지 않도록 known_hosts에 등록하기 위해 yes를 입력합니다.
-    ```
-    The authenticity of host '140.238.1.158 (140.238.1.158)' can't be established.
-    ECDSA key fingerprint is SHA256:88V1g6wPQ7pVuDLtKRl2E5XGzFdd1TpMITZcPPQm1SM.
-    ECDSA key fingerprint is MD5:01:dc:0b:02:d3:e9:aa:a3:d9:e4:f5:61:3d:f5:59:a5.
-    Are you sure you want to continue connecting (yes/no)? yes
-    ```
-
-    PING 테스트
-    ```
-    140.238.1.158 | SUCCESS => {
+    140.238.13.xxx | SUCCESS => {
         "ansible_facts": {
             "discovered_interpreter_python": "/usr/bin/python"
         }, 
@@ -267,11 +314,103 @@ $ (oci-ansible) git clone https://github.com/oracle/oci-ansible-modules.git
     }
     ```
 
----
-
-
 ### Ansible을 활용한 서버 구성 (Configuration) 
-OCI Compute (Linux)에 Apache + PHP-FPM 조합의 환경을 구성해봅니다.
+OCI Compute (Linux)에 Nginx + PHP-FPM + MariaDB + Wordpress 조합의 환경을 구성해봅니다. 
+
+전체 그림 한장 추가!!!!
+
+1. 환경 구성을 위한 실습용 Playbook과 Role(Task, Handler, Template)은 다음 위치에서 확인할 수 있습니다. 
+    ```
+    $ (oci-ansible) cd meetup-200118-iac/ansible/wordpress-nginx_rhel7
+    ```
+
+2. 실습용 Ansible Playbook과 Role이 포함된 전체 디렉토리 구성은 다음과 같습니다.
+    - group_vars : 전체 task에서 사용할 변수값
+    - roles  
+        ├── common : yum package repository 구성용 task  
+        ├── mariadb : MariaDB 설치, 구성, 시작 task  
+        ├── nginx : Nginx 설치, 구성, 시작 task  
+        ├── php-fpm : php-fpm 설치, 구성, 시작 task  
+        └── wordpress : wordpress 설치, 구성, 시작 task  
+    - site.yml : 전체 Role을 실행하기 위한 Playbook
+
+    ```shell
+    wordpress-nginx_rhel7/
+    ├── group_vars
+    │   └── all
+    ├── roles
+    │   ├── common
+    │   │   ├── files
+    │   │   │   ├── RPM-GPG-KEY-EPEL-7
+    │   │   │   ├── RPM-GPG-KEY-NGINX
+    │   │   │   ├── RPM-GPG-KEY-remi
+    │   │   │   ├── epel.repo
+    │   │   │   ├── nginx.repo
+    │   │   │   └── remi.repo
+    │   │   └── tasks
+    │   │       └── main.yml
+    │   ├── mariadb
+    │   │   ├── handlers
+    │   │   │   └── main.yml
+    │   │   ├── tasks
+    │   │   │   └── main.yml
+    │   │   └── templates
+    │   │       └── my.cnf.j2
+    │   ├── nginx
+    │   │   ├── handlers
+    │   │   │   └── main.yml
+    │   │   ├── tasks
+    │   │   │   └── main.yml
+    │   │   └── templates
+    │   │       └── default.conf
+    │   ├── php-fpm
+    │   │   ├── handlers
+    │   │   │   └── main.yml
+    │   │   ├── tasks
+    │   │   │   └── main.yml
+    │   │   └── templates
+    │   │       └── wordpress.conf
+    │   └── wordpress
+    │       ├── tasks
+    │       │   └── main.yml
+    │       └── templates
+    │           └── wp-config.php
+    └── site.yml
+    ```
+
+3. Ansible Playbook을 실행합니다. **{compartment}** 부분을 실제 compartment명(e.g. meetup-compartment-39626)으로 대체합니다.
+
+    ```shell
+    $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py -l {compartment} site.yml
+    ```
+
+    예시입니다.
+    ```shell
+    $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py -l meetup-compartment-39626 site.yml
+    ```
+
+3. 다음과 같이
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Ansible을 활용한 서버 프로비저닝 (Provisioning)
 OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.

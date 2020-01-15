@@ -49,6 +49,16 @@ resource "oci_core_security_list" "public_slt" {
     source   = "0.0.0.0/0"
 
     tcp_options {
+      max = "22"
+      min = "22"
+    }
+  }
+
+  ingress_security_rules {
+    protocol = "6"
+    source   = "0.0.0.0/0"
+
+    tcp_options {
       max = "80"
       min = "80"
     }

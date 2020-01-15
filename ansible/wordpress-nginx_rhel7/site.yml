@@ -1,0 +1,12 @@
+---
+- name: Install WordPress, MariaDB, Nginx, and PHP-FPM
+  hosts: all
+  remote_user: opc
+  become_method: sudo
+  become: yes
+  roles:
+    - common
+    - mariadb
+    - nginx
+    - php-fpm
+    - wordpress
