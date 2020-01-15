@@ -7,18 +7,18 @@ resource "random_id" "random_id" {
 # Create Compute Instance
 
 resource "oci_core_instance" "compute_instance" {
-  count               = "${var.compute["num_nodes"]}"
-  availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 1], "name")}"
-  compartment_id      = "${var.compartment_ocid}"
+  count               = var.compute["num_nodes"]
+  availability_domain = lookup(data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 1], "name")
+  compartment_id      = var.compartment_ocid
   #display_name = "${var.name_prefix}-instance-${random_id.random_id.dec}"
-  display_name = "${var.compute["num_nodes"] != "1" ? "${var.name_prefix}-instance-${random_id.random_id.dec}-${count.index + 1}" : "${var.name_prefix}-instance-${random_id.random_id.dec}"}"
-  #image = "${var.image_ocid}"
-  shape = "${var.compute["instance_shape"]}"
-  #subnet_id = "${var.private_subnet_ocid}"
-  freeform_tags = "${var.freeform_tags}"
+  display_name = var.compute["num_nodes"] != "1" ? "${var.name_prefix}-instance-${random_id.random_id.dec}-${count.index + 1}" : "${var.name_prefix}-instance-${random_id.random_id.dec}"
+  #image = var.image_ocid
+  shape = var.compute["instance_shape"]
+  #subnet_id = var.private_subnet_ocid
+  freeform_tags = var.freeform_tags
 
   create_vnic_details {
-    subnet_id        = "${var.public_subnet_ocid}"
+    subnet_id        = var.public_subnet_ocid
     display_name     = "${var.name_prefix}-primaryvnic-${random_id.random_id.dec}"
     assign_public_ip = true
     #hostname_label   = "${var.name_prefix}-${random_id.random_id.dec}-${count.index}"
@@ -26,11 +26,11 @@ resource "oci_core_instance" "compute_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = "${local.images[var.region]}"
+    source_id   = local.images[var.region]
   }
 
   metadata = {
-    ssh_authorized_keys = "${var.ssh_public_key}"
+    ssh_authorized_keys = var.ssh_public_key
   }
 
   timeouts {
@@ -58,4 +58,3 @@ locals {
     us-phoenix-1    = "ocid1.image.oc1.phx.aaaaaaaauuj2b3bvpbtpcyrfdvxu7tuajrwsmajhn6uhvx4oquecap63jywa"
   }
 }
-

@@ -17,14 +17,14 @@ variable "name_prefix" {
   default = "meetup"
 }
 variable "freeform_tags" {
-  type = "map"
+  type = map(string)
 
   default = {
     freeform_tags = "Freeform Tags"
   }
 }
 variable "defined_tags" {
-  type = "map"
+  type = map(string)
 
   default = {
     "KRSET02.ET" = "ET_TEAM:donghu.kim@oracle.com"
@@ -33,7 +33,7 @@ variable "defined_tags" {
 
 # for compute module
 variable "compute" {
-  type = "map"
+  type = map(string)
 
   default = {
     num_nodes      = 1
