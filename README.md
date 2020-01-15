@@ -130,38 +130,41 @@ OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
     ```
 
 ### Terraform Plan
-동일한 경로에서 다음과 같이 수행합니다. **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
+Terraform Plan을 실행하면 작성한 계획에 따라 정확히 수행되는지 미리 체크해볼 수 있습니다. HCL에 대한 검증도 함께 수행합니다. Plan 단계에서는 실제 인프라에 반영되지 않습니다.
 
-  ```shell
-  $ terraform plan -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+* 동일한 경로에서 다음과 같이 수행합니다. **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
+    ```shell
+    $ terraform plan -var-file="/home/{os_user}/.terraform/env/env.tfvars"
 
-  Plan: 14 to add, 0 to change, 0 to destroy.
-  ```
+    Plan: 14 to add, 0 to change, 0 to destroy.
+    ```
 
 ### Terraform Apply
-동일한 경로에서 다음과 같이 수행합니다. 마찬가지로 **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
+실제로 인프라에 Terraform에 구성한 계획을 실행합니다.
 
-  ```shell
-  $ terraform apply -var-file="/home/{os_user}/.terraform/env/env.tfvars"
-  ```
+1. 동일한 경로에서 다음과 같이 수행합니다. 마찬가지로 **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
 
-실행하면 다음과 같이 Apply 실행에 대한 최종 Approve 여부를 물어봅니다. yes를 입력하고 엔터를 입력합니다.
+    ```shell
+    $ terraform apply -var-file="/home/{os_user}/.terraform/env/env.tfvars"
+    ```
 
-> apply와 destroy의 경우는 기본적으로 Approve 여부를 물어보는데, 실행시에 다음과 같이 auto-approve 옵션을 주면 Approve 단계를 건너뜁니다.  
-> terraform apply --auto-approve
+2. 실행하면 다음과 같이 Apply 실행에 대한 최종 Approve 여부를 물어봅니다. yes를 입력하고 엔터를 입력합니다.
 
-  ```shell
-  Do you want to perform these actions?
-    Terraform will perform the actions described above.
-    Only 'yes' will be accepted to approve.
+    > apply와 destroy의 경우는 기본적으로 Approve 여부를 물어보는데, 실행시에 다음과 같이 auto-approve 옵션을 주면 Approve 단계를 건너뜁니다.  
+    > terraform apply --auto-approve
 
-    Enter a value: yes
-  ```
+    ```shell
+    Do you want to perform these actions?
+      Terraform will perform the actions described above.
+      Only 'yes' will be accepted to approve.
 
-생성이 완료되면 다음과 같은 메시지를 볼 수 있습니다.
-  ```shell
-  Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
-  ```
+      Enter a value: yes
+    ```
+
+3. 생성이 완료되면 다음과 같은 메시지를 볼 수 있습니다.
+    ```shell
+    Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
+    ```
 
 ### OCI Console에서 생성된 Resource 확인
 1. 다음 주소로 OCI Console에 접속합니다.
@@ -592,7 +595,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
   ```
 
   ADW 인스턴스 삭제 확인
-  
+
   ![](images/ansible-adw-deleted.png)
 
 </details>
