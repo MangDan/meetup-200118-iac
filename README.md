@@ -299,3 +299,8 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
 
 </details>
 
+5. ADW Instance 확인
+https://console.ap-seoul-1.oraclecloud.com/?tenant={Tenancy명}
+
+제공된 ID/PW를 활용하여 접속, ADW 메뉴에서 생성된 ADW 인스턴스 확인
+
