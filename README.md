@@ -31,15 +31,14 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 2. 아래 URL로 접속해서 본인 이메일을 입력한 후 제출을 클릭하면 실습 환경정보를 확인할 수 있습니다.
 
 3. 클라이언트 환경 접속
-    접속을 위한 
 
     #### Windows (Putty)
     Connection - SSH - 키 입력하는 방식에 대한 이미지 추가
 
-    Putty 접속
+    Putty 접속  
     ![](images/putty1.png)
 
-    Putty 접속 확인
+    Putty 접속 확인  
     ![](images/putty2.png)
 
     #### macOS Terminal
@@ -47,7 +46,7 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
     $ ssh -i ~/sshkeys/id_rsa {osuser}@{client_ip}
     ```
 
-4. 접속하면 다음과 같이 실습을 위해 제공되는 환경 구성 파일과 pem, rsa key를 확인할 수 있습니다.
+4. 접속하면 다음과 같이 실습을 위해 제공되는 환경 구성 파일과 rsa key (pem, der format)를 확인할 수 있습니다.
     ```shell
     $ ls -lart
 
@@ -56,14 +55,15 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
       drwx------.  2 user1 handson    80  1월 15 00:55 .ssh
     ```
 
-    > .oci    ----------> oci python sdk에서 oci에 접속하기 위한 정보와 PEM Key  
+    > .oci    ----------> oci python sdk에서 oci에 접속하기 위한 정보와 PEM Format Key  
     > .terraform  ----> terraform 실습에서 사용할 환경 변수   
-    > .ssh  ----------> terraform으로 생성하는 Compute 환경에 접속하기 위한 RSA Key
+    > .ssh  ----------> terraform으로 생성하는 Compute 환경에 접속하기 위한 DER Format Key
 
-5. 접속한 실습 환경에서 실습을 위한 Terraform, Ansible 소스를 git clone을 통해서 다운로드 받습니다. ($는 입력하지 않습니다.)
-```
-$ git clone https://github.com/mangdan/meetup-200118-iac.git
-```
+5. 접속한 실습 환경에서 실습을 위한 Terraform, Ansible 소스를 git clone을 통해서 다운로드 받습니다.  
+   **$는 입력하지 않습니다.**
+  ```
+  $ git clone https://github.com/mangdan/meetup-200118-iac.git
+  ```
 
 <details>
 <summary>
