@@ -67,14 +67,14 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 
 <details>
 <summary>
-<font size=4>Terraform with OCI (Hands-On)</font>
+<font size=4>실습1) Terraform with OCI (Hands-On)</font>
 </summary>
 
 > 실습 환경에는 이미 Terraform이 설치되어 제공됩니다.  
 > Terraform 설치와 관련해서는 아래 URL을 참고합니다.  
 > https://learn.hashicorp.com/terraform/getting-started/install.html
 
-Terraform 설치 확인
+Terraform 설치 확인  
     ```shell
     $ terraform version
     ```
@@ -190,7 +190,7 @@ OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
 
 <details>
 <summary>
-<font size=4>Ansible with OCI (Hands-On)</font>
+<font size=4>실습2) Ansible with OCI (Hands-On)</font>
 </summary>
 
 ### 실습 환경 (그림 한장)
