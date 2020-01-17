@@ -36,7 +36,7 @@ variable "compute" {
   type = map(string)
 
   default = {
-    num_nodes      = 1
+    num_nodes      = 2
     instance_shape = "VM.Standard2.1"
   }
 }
