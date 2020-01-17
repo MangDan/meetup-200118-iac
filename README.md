@@ -440,7 +440,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
 ### ADW 인스턴스 생성
 1. 실습용 Playbook 확인
     ```shell
-    $ (oci-ansible) cd meetup-200118-iac/terraform/oci
+    $ (oci-ansible) cd meetup-200118-iac/ansible/oci
 
     compartment.yml
     adw.yml
