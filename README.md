@@ -67,7 +67,7 @@
 </summary>
 
 ### Terraform 실습 시나리오
-Terraform 실습에서는 Compartment 1개, Virtual Cloud Network, Security List, Route Table, Internet Gateway와 2개의 Compute Instance (Oracle Linux7)을 프로비저닝합니다.
+Terraform 실습에서는 Compartment 1개, Virtual Cloud Network(가상 클라우드 네트워크), Security List(보안 목록), Route Table (라우트 테이블), Internet Gateway (인터넷 게이트웨이)와 2개의 Compute Instance (Oracle Linux7)을 프로비저닝합니다.
 
 ![](images/scenario_terraform.png)
 
@@ -186,7 +186,7 @@ Terraform Plan을 실행하면 작성한 계획에 따라 정확히 수행되는
     ![](images/oci_compute_created.png)
 
 6. 마찬가지로 생성된 VCN 확인을 위해 다음 페이지로 이동합니다.
-    > 좌측 상단 햄버거 메뉴 > Networking > Virtual Cloud Networks
+    > 좌측 상단 햄버거 메뉴 > Networking (네트워킹) > Virtual Cloud Networks (가상 클라우드 네트워크)
 
 7. 생성된 VCN을 확인합니다.
     ![](images/oci_vcn_created.png)
@@ -284,7 +284,7 @@ Ansible OCI Module은 Ansible Galaxy에서 Role로 제공되고 있으며, GitHu
     },
     ```
 
-4. 위에서 확인한 Compartment명을 이용해서 해당 Host에 Ping 테스트를 수행합니다. 여기서 **{compartment}** 는 위에서 확인한 **meetup-compartment-숫자**로 대체한 후 실행합니다.
+4. 위에서 확인한 Compartment명을 이용해서 해당 Host에 Ping 테스트를 수행합니다. 여기서 <font color=red>**{compartment}**</font> 는 위에서 확인한 <font color=red>**meetup-compartment-숫자**</font>로 대체한 후 실행합니다.
 
     대상 서버에 접속할때마다 key를 입력하지 않도록 known_hosts에 등록하기 위해 yes를 입력하는 프롬프트가 나오는데, 아래와 같이 환경 변수를 추가하면 체크하지 않고 넘어갑니다.
     ```shell
@@ -394,14 +394,17 @@ OCI Compute (Linux)에 Nginx + PHP-FPM + MariaDB + Wordpress 조합의 환경을
     $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py -l meetup-compartment-39626 site.yml
     ```
 
-4. 성공적으로 완료되면 다음과 같이 변경된 구성의 개수(41개)를 확인할 수 있습니다.
+4. 성공적으로 완료되면 다음과 같이 변경된 구성의 개수(41개)를 확인할 수 있습니다. 두 개의 IP를 메모합니다.
     ```
     PLAY RECAP *****************************************************************************************************
     140.238.18.xxx             : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
     140.238.3.xx               : ok=45   changed=41   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
     ```
 
-5. 설치된 Wordpress에 접속해봅니다. 두 개의 Compute Instance를 모두 확인해봅니다.
+5. 설치된 Wordpress에 위에서 메모한 IP로 접속합니다.
+    * http://140.238.18.xxx
+    * http://140.238.3.xx
+
     > 구성 화면에서 간단히 사이트 이름, 관리자 ID, 이메일, 패스워드를 입력하여 완료하면 Wordpress의 기본 화면을 볼 수 있습니다.
 
   * 1번 Instance의 Wordpress 구성 화면 (영어 버전)  

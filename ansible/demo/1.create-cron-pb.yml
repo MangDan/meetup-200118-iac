@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: opc
+  gather_facts: no
+  tasks:
+    - cron: 
+        name: 1. Add Cron Job 'ls -alh > /dev/null' 
+        minute: "5"
+        job: "ls -alh > /dev/null"
