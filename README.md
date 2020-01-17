@@ -13,9 +13,8 @@
 * OCI (Oracle Cloud Infrastructure) 계정
 * SSH Terminal (windows Putty, macOS Terminal 등)
 
-## 환경 구성도
-Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
-
+## 전체 시나리오
+![](images/scenario.png)
 
 ---
 
@@ -33,13 +32,10 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 3. 클라이언트 환경 접속
 
     #### Windows (Putty)
-    Connection - SSH - 키 입력하는 방식에 대한 이미지 추가
+    Windows 사용자는 Putty를 사용하여 접속합니다.
 
     Putty 접속  
-    ![](images/putty1.png)
-
-    Putty 접속 확인  
-    ![](images/putty2.png)
+    ![](images/putty_connection.png)
 
     #### macOS Terminal
     ```
@@ -67,8 +63,14 @@ Terraform과 Ansible을 이용한 전체 실습 구성 이미지 한장
 
 <details>
 <summary>
-<font size=4>실습1) Terraform with OCI (Hands-On)</font>
+<font size=5>실습1) Terraform with OCI (Hands-On)</font>
 </summary>
+
+### Terraform 실습 시나리오
+Terraform 실습에서는 Compartment 1개, Virtual Cloud Network, Security List, Route Table, Internet Gateway와 2개의 Compute Instance (Oracle Linux7)을 프로비저닝합니다.
+
+![](images/scenario_terraform.png)
+
 
 > 실습 환경에는 이미 Terraform이 설치되어 제공됩니다.  
 > Terraform 설치와 관련해서는 아래 URL을 참고합니다.  
@@ -193,12 +195,13 @@ Terraform Plan을 실행하면 작성한 계획에 따라 정확히 수행되는
 
 <details>
 <summary>
-<font size=4>실습2) Ansible with OCI (Hands-On)</font>
+<font size=5>실습2) Ansible with OCI (Hands-On)</font>
 </summary>
 
-### 실습 환경 (그림 한장)
-* Ansible Control Server
-* Ansible Target Server
+### Ansible 실습 시나리오
+Ansible 실습에서는 Terraform으로 프로비저닝한 환경에 WordPress, Nginx, MariaDB, php-fpm을 구성합니다.
+
+![](images/scenario_ansible.png)
 
 Ansible은 Python 기반으로 개발된 오픈소스로 Python2(2.7) 혹은 Python3(3.5+)를 필요로 합니다. 실습 환경에는 이미 Python2가 설치되어 제공되고 있으며, Python Package Manager인 pip와 Python 가상환경 (virtualenv)에서 실습을 위한 Python virtualenv가 설치되어 제공됩니다. 
 
