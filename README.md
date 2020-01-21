@@ -207,7 +207,7 @@ Ansible은 Python 기반으로 개발된 오픈소스로 Python2(2.7) 혹은 Pyt
 
   * python, pip, virtualenv 설치 확인
     ```shell
-    $ python --verion
+    $ python --version
 
     $ pip --version
 
@@ -460,7 +460,15 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
     region=ap-seoul-1
     ```
 
-3. 먼저 ADW를 생성하기 위한 Compartment를 생성합니다. 다음은 Compartment 생성을 위한 Playbook입니다.
+3. Oracle Ansible Module의 Default Logging Location은 **/tmp/oci_ansible_module.log** 입니다. 실습 환경이 여러 사용자가 사용하는 환경이므로, 해당 로그 파일의 위치를 변경해줘야 합니다. 
+> 실행하면 다른 사용자가 생성한 파일에 접근하려고 하기 때문에 권한 오류 발생
+
+  다음과 같이 환경 변수를 추가합니다.
+  ```shell
+  $ export LOG_PATH=~/meetup-200118-iac/ansible/oci
+  ```
+
+4. 먼저 ADW를 생성하기 위한 Compartment를 생성합니다. 다음은 Compartment 생성을 위한 Playbook입니다.
   
   * compartment.yml playbook 내용
     ```yml
@@ -500,7 +508,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
             - always
     ```
 
-4. 아래의 스크립트를 실행합니다. **{tenancy_ocid}** 부분을 위에서 메모한 tenancy_ocid로 대체하여 실행합니다.
+5. 아래의 스크립트를 실행합니다. **{tenancy_ocid}** 부분을 위에서 메모한 tenancy_ocid로 대체하여 실행합니다.
     > 생성되는 Compartment명은 **ansible_compartment** 입니다.
 
     ```shell
@@ -512,13 +520,13 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
     $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansitory-script/oci_inventory.py compartment.yml -t create_compartment -e "tenancy_ocid=ocid1.tenancy.oc1..aaaaaaaagxn3didg4xptrk53xjrw3fvlvle5ma7a5s7vtk7vqbkru...."
     ```
 
-5. 실행하면 Compartment가 생성되며, 생성된 결과가 다음과 같이 출력됩니다. 아래 id의 값을 메모합니다.
+6. 실행하면 Compartment가 생성되며, 생성된 결과가 다음과 같이 출력됩니다. 아래 id의 값을 메모합니다.
     > 아래 이미지에서 출력된 compartment_ocid는 생성된 compartment의 상위 ocid입니다. 생성된 compartment_ocid는 id의 값입니다.
 
     ![](images/ansible_compartment_result.png)
     
 
-6. Oracle Autonomous Data Warehouse를 위에서 생성한 Compartment에 생성합니다. 다음은 ADW를 생성하기 위한 Playbook입니다.
+7. Oracle Autonomous Data Warehouse를 위에서 생성한 Compartment에 생성합니다. 다음은 ADW를 생성하기 위한 Playbook입니다.
 
   * adw.yml playbook
     ```yml
@@ -566,7 +574,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
             - always
     ```
 
-7. ADW 프로비저닝을 위해 다음과 같이 Ansible Playbook을 실행합니다. **{compartment_ocid}** 는 위에서 생성한 Compartment의 id로 대체합니다.
+8. ADW 프로비저닝을 위해 다음과 같이 Ansible Playbook을 실행합니다. **{compartment_ocid}** 는 위에서 생성한 Compartment의 id로 대체합니다.
     ```shell
     $ (oci-ansible) ansible-playbook -i ~/.ansible/roles/oracle.oci_ansible_modules/inventory-script/oci_inventory.py adw.yml -t create_adw -e "compartment_ocid={compartment_ocid}"
     ```
@@ -580,7 +588,7 @@ OCI에 Oracle Autonomous Data warehouse(ADW)를 프로비저닝해봅니다.
 
     ![](images/ansible_adw_created_id.png)
 
-5. 생성된 ADW 인스턴스 확인
+9. 생성된 ADW 인스턴스 확인
   OCI Console에 로그인 한 후 다음 페이지로 이동하여 생성된 ADW 인스턴스를 확인합니다.
     > 좌측 상단 햄버거 버튼 > Autonomous Data Warehouse > 좌측 **ansible-compartment** 선택
 

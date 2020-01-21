@@ -2,21 +2,17 @@
   "Control#Nightly-Stop=FALSE": {
     "hosts": [
       "132.145.95.114",
+      "140.238.16.245",
       "140.238.19.19",
       "140.238.13.195",
       "140.238.2.225"
     ]
   },
-  "Control#Nightly-Stop=TRUE": {
-    "hosts": [
-      "140.238.14.75",
-      "132.145.94.30",
-      "132.145.83.224"
-    ]
-  },
   "DONGHU.KIM": {
     "hosts": [
-      "132.145.95.114"
+      "132.145.95.114",
+      "140.238.16.245",
+      "140.238.11.90"
     ]
   },
   "EK": {
@@ -34,42 +30,26 @@
       "140.238.13.195"
     ]
   },
-  "KRSET01#Named=jylee": {
-    "hosts": [
-      "140.238.17.127"
-    ]
-  },
   "KRSET02#ET=wonjo.yoo_oracle.com": {
     "hosts": [
       "140.238.2.225"
     ]
   },
-  "KRSET02#MI=jihun.na_oracle.com": {
-    "hosts": [
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30",
-      "132.145.83.224"
-    ]
-  },
   "VM.Standard.E2.1": {
     "hosts": [
       "132.145.95.114",
-      "140.238.19.19",
-      "140.238.14.75",
-      "132.145.94.30",
-      "132.145.83.224"
+      "140.238.19.19"
     ]
   },
   "VM.Standard2.1": {
     "hosts": [
-      "140.238.18.25",
+      "140.238.16.245",
+      "140.238.11.90",
       "140.238.2.225"
     ]
   },
   "VM.Standard2.2": {
     "hosts": [
-      "140.238.17.127",
       "132.145.82.24",
       "140.238.13.195"
     ]
@@ -122,102 +102,6 @@
         "time_created": "2019-08-12T05:16:52.836000+00:00",
         "time_maintenance_reboot_due": null
       },
-      "132.145.83.224": {
-        "agent_config": {
-          "is_management_disabled": null,
-          "is_monitoring_disabled": false
-        },
-        "availability_domain": "fttO:AP-SEOUL-1-AD-1",
-        "compartment_id": "ocid1.compartment.oc1..aaaaaaaaqp7ieumpuae5hvnm3yqgdeaocge2lv2v6oppmmtjqeenntlfejbq",
-        "dedicated_vm_host_id": null,
-        "defined_tags": {
-          "Control": {
-            "Nightly-Stop": "TRUE"
-          },
-          "KRSET02": {
-            "MI": "jihun.na@oracle.com"
-          }
-        },
-        "display_name": "OCI_CLIENT_COM",
-        "extended_metadata": {},
-        "fault_domain": "FAULT-DOMAIN-2",
-        "freeform_tags": {},
-        "id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yicpy2ppq3jlu3npjnew3sz57rfhbxnvv3ggr3dzrizif2a",
-        "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
-        "ipxe_script": null,
-        "launch_mode": "PARAVIRTUALIZED",
-        "launch_options": {
-          "boot_volume_type": "PARAVIRTUALIZED",
-          "firmware": "UEFI_64",
-          "is_consistent_volume_naming_enabled": true,
-          "is_pv_encryption_in_transit_enabled": false,
-          "network_type": "PARAVIRTUALIZED",
-          "remote_data_volume_type": "PARAVIRTUALIZED"
-        },
-        "lifecycle_state": "RUNNING",
-        "metadata": {
-          "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAlrlEOHjC3xQOLgv55C26nsTzC1QHzaaxK6PJ6YYH1jvCFEAiQLrp3TZuiuLYl7XoXPiELQZMA1+Rst/b5oLOH+Do7qNbjo6m9w/iQD0FpFgMhe0MHO6wXq7X1auckhMG100Z0RetvENeK/C6JBXjLo7oB1VPwh2e2WvaP4TWViSBAv2NeuK52i/VBytGyducPRajWYVgvtKgJHeNWObxeviH7m0/9okXHTLIU5rw/9ExGurx5yScLYlmIkH68YqVf8Owoqs/m59y5f+nKdA8kUFy+aBs6E6glAcJpCho6Hl9OQvqGYlNKO3E5CfkqP06RB79XhFcOcc21EfShaIKWQ== rsa-key-20190221"
-        },
-        "region": "ap-seoul-1",
-        "shape": "VM.Standard.E2.1",
-        "source_details": {
-          "boot_volume_size_in_gbs": null,
-          "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
-          "kms_key_id": null,
-          "source_type": "image"
-        },
-        "system_tags": {},
-        "time_created": "2020-01-13T08:44:02.173000+00:00",
-        "time_maintenance_reboot_due": null
-      },
-      "132.145.94.30": {
-        "agent_config": {
-          "is_management_disabled": null,
-          "is_monitoring_disabled": false
-        },
-        "availability_domain": "fttO:AP-SEOUL-1-AD-1",
-        "compartment_id": "ocid1.compartment.oc1..aaaaaaaaqp7ieumpuae5hvnm3yqgdeaocge2lv2v6oppmmtjqeenntlfejbq",
-        "dedicated_vm_host_id": null,
-        "defined_tags": {
-          "Control": {
-            "Nightly-Stop": "TRUE"
-          },
-          "KRSET02": {
-            "MI": "jihun.na@oracle.com"
-          }
-        },
-        "display_name": "IDC_WEB_COM",
-        "extended_metadata": {},
-        "fault_domain": "FAULT-DOMAIN-3",
-        "freeform_tags": {},
-        "id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yicglqm2rq7dwe3b6ntqpqr3j3rmilzv2d7cowuhdg5evpa",
-        "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
-        "ipxe_script": null,
-        "launch_mode": "PARAVIRTUALIZED",
-        "launch_options": {
-          "boot_volume_type": "PARAVIRTUALIZED",
-          "firmware": "UEFI_64",
-          "is_consistent_volume_naming_enabled": true,
-          "is_pv_encryption_in_transit_enabled": false,
-          "network_type": "PARAVIRTUALIZED",
-          "remote_data_volume_type": "PARAVIRTUALIZED"
-        },
-        "lifecycle_state": "RUNNING",
-        "metadata": {
-          "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAlrlEOHjC3xQOLgv55C26nsTzC1QHzaaxK6PJ6YYH1jvCFEAiQLrp3TZuiuLYl7XoXPiELQZMA1+Rst/b5oLOH+Do7qNbjo6m9w/iQD0FpFgMhe0MHO6wXq7X1auckhMG100Z0RetvENeK/C6JBXjLo7oB1VPwh2e2WvaP4TWViSBAv2NeuK52i/VBytGyducPRajWYVgvtKgJHeNWObxeviH7m0/9okXHTLIU5rw/9ExGurx5yScLYlmIkH68YqVf8Owoqs/m59y5f+nKdA8kUFy+aBs6E6glAcJpCho6Hl9OQvqGYlNKO3E5CfkqP06RB79XhFcOcc21EfShaIKWQ== rsa-key-20190221"
-        },
-        "region": "ap-seoul-1",
-        "shape": "VM.Standard.E2.1",
-        "source_details": {
-          "boot_volume_size_in_gbs": null,
-          "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
-          "kms_key_id": null,
-          "source_type": "image"
-        },
-        "system_tags": {},
-        "time_created": "2020-01-13T08:48:45.486000+00:00",
-        "time_maintenance_reboot_due": null
-      },
       "132.145.95.114": {
         "agent_config": {
           "is_management_disabled": null,
@@ -259,6 +143,47 @@
         },
         "system_tags": {},
         "time_created": "2019-11-26T05:56:06.177000+00:00",
+        "time_maintenance_reboot_due": null
+      },
+      "140.238.11.90": {
+        "agent_config": {
+          "is_management_disabled": null,
+          "is_monitoring_disabled": false
+        },
+        "availability_domain": "fttO:AP-SEOUL-1-AD-1",
+        "compartment_id": "ocid1.compartment.oc1..aaaaaaaascylaglqxkdzsg3woajozahmtow3psj42ync5jnz6xrqwovhtoxq",
+        "dedicated_vm_host_id": null,
+        "defined_tags": {},
+        "display_name": "instance-20200117-1846",
+        "extended_metadata": {},
+        "fault_domain": "FAULT-DOMAIN-1",
+        "freeform_tags": {},
+        "id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yicijbimkzktn276ezdeuncelzlaggnmbd7pi6hlqea42jq",
+        "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
+        "ipxe_script": null,
+        "launch_mode": "NATIVE",
+        "launch_options": {
+          "boot_volume_type": "PARAVIRTUALIZED",
+          "firmware": "UEFI_64",
+          "is_consistent_volume_naming_enabled": true,
+          "is_pv_encryption_in_transit_enabled": false,
+          "network_type": "PARAVIRTUALIZED",
+          "remote_data_volume_type": "PARAVIRTUALIZED"
+        },
+        "lifecycle_state": "RUNNING",
+        "metadata": {
+          "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnV1Flgu2pg4Uwn3b+eonrAvJBLeQV1lSwkrUa2TEnH9KNajvJ/HJsGme96zSlCzA28VN5HX1EAdM3FS5ik7w2QQLtWzZ40qYmsFn+lvQw1+Dy0usTuHSOoTVb732xiMZkSYu+gV45xhbZOlWGuwQqn7hb4mH2jXjMclrh0vRKoZZgzws+2OFVQ/J+WjHCVxtX1sEQTNRYtNlE/ADfhlh7ODGcl1U7zFU0JDtPhf0Vy731fqL9+hLH96YcUag7lrAM9XmQGyiZZbDvwWklM+M15yUWjJ41KsimQ0vI9cgRvFvxnwkGKKKTlZoMKcLvOmcTXKWzIfC091aXmt895FVn DonghuKim@MacBook-Pro.local"
+        },
+        "region": "ap-seoul-1",
+        "shape": "VM.Standard2.1",
+        "source_details": {
+          "boot_volume_size_in_gbs": null,
+          "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
+          "kms_key_id": null,
+          "source_type": "image"
+        },
+        "system_tags": {},
+        "time_created": "2020-01-17T09:47:04.114000+00:00",
         "time_maintenance_reboot_due": null
       },
       "140.238.13.195": {
@@ -307,117 +232,24 @@
         "time_created": "2019-12-19T06:03:13.252000+00:00",
         "time_maintenance_reboot_due": null
       },
-      "140.238.14.75": {
+      "140.238.16.245": {
         "agent_config": {
           "is_management_disabled": null,
           "is_monitoring_disabled": false
         },
         "availability_domain": "fttO:AP-SEOUL-1-AD-1",
-        "compartment_id": "ocid1.compartment.oc1..aaaaaaaaqp7ieumpuae5hvnm3yqgdeaocge2lv2v6oppmmtjqeenntlfejbq",
+        "compartment_id": "ocid1.compartment.oc1..aaaaaaaascylaglqxkdzsg3woajozahmtow3psj42ync5jnz6xrqwovhtoxq",
         "dedicated_vm_host_id": null,
         "defined_tags": {
           "Control": {
-            "Nightly-Stop": "TRUE"
-          },
-          "KRSET02": {
-            "MI": "jihun.na@oracle.com"
+            "Nightly-Stop": "FALSE"
           }
         },
-        "display_name": "IDC_IPSEC_COM",
-        "extended_metadata": {},
-        "fault_domain": "FAULT-DOMAIN-3",
-        "freeform_tags": {},
-        "id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yici2kgfbsvyvvpnp3crqfbfqfrvdia7ralz2b53bnxikga",
-        "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
-        "ipxe_script": null,
-        "launch_mode": "PARAVIRTUALIZED",
-        "launch_options": {
-          "boot_volume_type": "PARAVIRTUALIZED",
-          "firmware": "UEFI_64",
-          "is_consistent_volume_naming_enabled": true,
-          "is_pv_encryption_in_transit_enabled": false,
-          "network_type": "PARAVIRTUALIZED",
-          "remote_data_volume_type": "PARAVIRTUALIZED"
-        },
-        "lifecycle_state": "RUNNING",
-        "metadata": {
-          "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAlrlEOHjC3xQOLgv55C26nsTzC1QHzaaxK6PJ6YYH1jvCFEAiQLrp3TZuiuLYl7XoXPiELQZMA1+Rst/b5oLOH+Do7qNbjo6m9w/iQD0FpFgMhe0MHO6wXq7X1auckhMG100Z0RetvENeK/C6JBXjLo7oB1VPwh2e2WvaP4TWViSBAv2NeuK52i/VBytGyducPRajWYVgvtKgJHeNWObxeviH7m0/9okXHTLIU5rw/9ExGurx5yScLYlmIkH68YqVf8Owoqs/m59y5f+nKdA8kUFy+aBs6E6glAcJpCho6Hl9OQvqGYlNKO3E5CfkqP06RB79XhFcOcc21EfShaIKWQ== rsa-key-20190221"
-        },
-        "region": "ap-seoul-1",
-        "shape": "VM.Standard.E2.1",
-        "source_details": {
-          "boot_volume_size_in_gbs": null,
-          "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
-          "kms_key_id": null,
-          "source_type": "image"
-        },
-        "system_tags": {},
-        "time_created": "2020-01-13T08:29:16.942000+00:00",
-        "time_maintenance_reboot_due": null
-      },
-      "140.238.17.127": {
-        "agent_config": {
-          "is_management_disabled": null,
-          "is_monitoring_disabled": false
-        },
-        "availability_domain": "fttO:AP-SEOUL-1-AD-1",
-        "compartment_id": "ocid1.compartment.oc1..aaaaaaaaoeu4zaez745or6p52yktk74dhzmrfd7nety6xrr6ek4kcw5rvq5q",
-        "dedicated_vm_host_id": null,
-        "defined_tags": {
-          "KRSET01": {
-            "Named": "jylee"
-          }
-        },
-        "display_name": "JYLEE-VPN",
+        "display_name": "instance-20200117-1744",
         "extended_metadata": {},
         "fault_domain": "FAULT-DOMAIN-1",
         "freeform_tags": {},
-        "id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yic36krhckuq27rxpn66an3ggdocx7digz3n2dgk642x5ga",
-        "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaambagtwp4ye5takue22aortyzb3q5dzcoanv6zu2legecxyoj7f2q",
-        "ipxe_script": null,
-        "launch_mode": "NATIVE",
-        "launch_options": {
-          "boot_volume_type": "PARAVIRTUALIZED",
-          "firmware": "UEFI_64",
-          "is_consistent_volume_naming_enabled": true,
-          "is_pv_encryption_in_transit_enabled": true,
-          "network_type": "PARAVIRTUALIZED",
-          "remote_data_volume_type": "PARAVIRTUALIZED"
-        },
-        "lifecycle_state": "RUNNING",
-        "metadata": {
-          "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAqetTkzFEESkXr731zsRMKcUlGBvj6UPfPwjg0sIIGJMpVh1moQM1EBxAyWdr01+x1Ff8xxhUwhhV1uGndGJxoFRAJp4U9vPbr3iVPJlTyAlNCQI0ohlnfCR5XqSswVfqAqyGOzJcdaRgV7qhywUXJFky+yVuhclFoiljrRuposn4RQCKxklFxovysrozRYmyIGWR93VIkh8sfb8tarycpqigACLhLtENAzkVT2yJg72ZXNrrOaTjc89BJ/SGh4NO9jkqYRC6xXKRv7XuJfO8T8mUud6+p27LHdxw+PINOUOQmikb7ScjuYVP1gV94/A7cKMrwvZwfi2dT1FHT0Ic+w== rsa-key-20160624"
-        },
-        "region": "ap-seoul-1",
-        "shape": "VM.Standard2.2",
-        "source_details": {
-          "boot_volume_size_in_gbs": null,
-          "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaambagtwp4ye5takue22aortyzb3q5dzcoanv6zu2legecxyoj7f2q",
-          "kms_key_id": null,
-          "source_type": "image"
-        },
-        "system_tags": {},
-        "time_created": "2019-12-02T05:52:16.230000+00:00",
-        "time_maintenance_reboot_due": null
-      },
-      "140.238.18.25": {
-        "agent_config": {
-          "is_management_disabled": null,
-          "is_monitoring_disabled": false
-        },
-        "availability_domain": "fttO:AP-SEOUL-1-AD-1",
-        "compartment_id": "ocid1.compartment.oc1..aaaaaaaaqp7ieumpuae5hvnm3yqgdeaocge2lv2v6oppmmtjqeenntlfejbq",
-        "dedicated_vm_host_id": null,
-        "defined_tags": {
-          "KRSET02": {
-            "MI": "jihun.na@oracle.com"
-          }
-        },
-        "display_name": "IDC_SG",
-        "extended_metadata": {},
-        "fault_domain": "FAULT-DOMAIN-2",
-        "freeform_tags": {},
-        "id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yic7dmz3vy5vm4cewztkww2tsihmqqjb57v6uvx5f4bjymq",
+        "id": "ocid1.instance.oc1.ap-seoul-1.anuwgljrvsea7yic4koxtqyk2wxpzgrzgefzfszobz3srrambkvx6f3ib3aq",
         "image_id": "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza",
         "ipxe_script": null,
         "launch_mode": "NATIVE",
@@ -431,7 +263,7 @@
         },
         "lifecycle_state": "RUNNING",
         "metadata": {
-          "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAlrlEOHjC3xQOLgv55C26nsTzC1QHzaaxK6PJ6YYH1jvCFEAiQLrp3TZuiuLYl7XoXPiELQZMA1+Rst/b5oLOH+Do7qNbjo6m9w/iQD0FpFgMhe0MHO6wXq7X1auckhMG100Z0RetvENeK/C6JBXjLo7oB1VPwh2e2WvaP4TWViSBAv2NeuK52i/VBytGyducPRajWYVgvtKgJHeNWObxeviH7m0/9okXHTLIU5rw/9ExGurx5yScLYlmIkH68YqVf8Owoqs/m59y5f+nKdA8kUFy+aBs6E6glAcJpCho6Hl9OQvqGYlNKO3E5CfkqP06RB79XhFcOcc21EfShaIKWQ== rsa-key-20190221"
+          "ssh_authorized_keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnV1Flgu2pg4Uwn3b+eonrAvJBLeQV1lSwkrUa2TEnH9KNajvJ/HJsGme96zSlCzA28VN5HX1EAdM3FS5ik7w2QQLtWzZ40qYmsFn+lvQw1+Dy0usTuHSOoTVb732xiMZkSYu+gV45xhbZOlWGuwQqn7hb4mH2jXjMclrh0vRKoZZgzws+2OFVQ/J+WjHCVxtX1sEQTNRYtNlE/ADfhlh7ODGcl1U7zFU0JDtPhf0Vy731fqL9+hLH96YcUag7lrAM9XmQGyiZZbDvwWklM+M15yUWjJ41KsimQ0vI9cgRvFvxnwkGKKKTlZoMKcLvOmcTXKWzIfC091aXmt895FVn DonghuKim@MacBook-Pro.local"
         },
         "region": "ap-seoul-1",
         "shape": "VM.Standard2.1",
@@ -442,7 +274,7 @@
           "source_type": "image"
         },
         "system_tags": {},
-        "time_created": "2020-01-17T06:50:05.354000+00:00",
+        "time_created": "2020-01-17T08:45:14.667000+00:00",
         "time_maintenance_reboot_due": null
       },
       "140.238.19.19": {
@@ -543,12 +375,9 @@
   "all": {
     "hosts": [
       "132.145.95.114",
+      "140.238.16.245",
+      "140.238.11.90",
       "140.238.19.19",
-      "140.238.17.127",
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30",
-      "132.145.83.224",
       "132.145.82.24",
       "140.238.13.195",
       "140.238.2.225"
@@ -558,43 +387,20 @@
   "fttO_AP-SEOUL-1-AD-1": {
     "children": [
       "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaibx5uavohzqw4llfznmslt6ojxjyikoogpf3xpuvxsdhkauvd2tq",
+      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaashzpqd7i6mkaw5jhk7q2po7iu3i6i326hybmpxohz6mmfwjrc7pa",
       "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaamwuqrtnvjpt2kcrwbgh72rtlx7cz6edmlyezhx2berd3gnxwu3qa",
-      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaunidt7axsg4n5d35d2q4pxprxe5jzcrzs55dazumdyp23spt62wq",
-      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaao7en225czsxe7ghpqkypes6oe4nqy2sosu3clrjwi75catvx2ja",
-      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa6lwxiioj7ruv4dbhaz43qrg2napdrzqtaxitujzzabhe5nn2ev7q",
       "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaam4err5qnm3fcxjhdaibz6u6qous6ytxjloinjdozkp5jqyfantoq",
       "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa2wfygwcobuw4wime64bhpakrzhzmzyvcsgteo2tnzo2xbnlswyuq",
       "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa5wkoobs2tvvkxyovwq2vcfiypiypgi6l2755oghfj25g22snjpjq"
     ],
     "hosts": [
       "132.145.95.114",
+      "140.238.16.245",
+      "140.238.11.90",
       "140.238.19.19",
-      "140.238.17.127",
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30",
-      "132.145.83.224",
       "132.145.82.24",
       "140.238.13.195",
       "140.238.2.225"
-    ]
-  },
-  "jaeyeop.lee": {
-    "hosts": [
-      "140.238.17.127"
-    ]
-  },
-  "jihun.na": {
-    "hosts": [
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30",
-      "132.145.83.224"
-    ]
-  },
-  "ocid1.image.oc1.ap-seoul-1.aaaaaaaambagtwp4ye5takue22aortyzb3q5dzcoanv6zu2legecxyoj7f2q": {
-    "hosts": [
-      "140.238.17.127"
     ]
   },
   "ocid1.image.oc1.ap-seoul-1.aaaaaaaan7wabh4ycs3pxdpy4zeghyuhj5wzqxrtvmszocm5sb374wj2jtza": {
@@ -614,20 +420,13 @@
   },
   "ocid1.image.oc1.ap-seoul-1.aaaaaaaaw52bcejclqwpqchgfx7fhuj4f4smruqxdywwn3uy2xhmhh6bzpza": {
     "hosts": [
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30",
-      "132.145.83.224"
+      "140.238.16.245",
+      "140.238.11.90"
     ]
   },
   "ocid1.image.oc1.ap-seoul-1.aaaaaaaaxfeztdrbpn452jk2yln7imo4leuhlqicoovoqu7cxqhkr3j2zuqa": {
     "hosts": [
       "140.238.2.225"
-    ]
-  },
-  "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaa2ovmrv3ffmlr3ddjike2e64zrdg3xxdhvesndnsyti336sl4pvva": {
-    "hosts": [
-      "132.145.83.224"
     ]
   },
   "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaa3oozfk2cgvrtoprghe6inaqd2qkgpcpkubcfz2f36yngdtimagha": {
@@ -650,11 +449,6 @@
       "132.145.82.24"
     ]
   },
-  "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaafczs4e5isb2ju7g7dxrq2wlb7ayebqaflcxqoypka4e6rgwatx5q": {
-    "hosts": [
-      "140.238.17.127"
-    ]
-  },
   "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaahvaaa6gqpy6gpynp2g5x7cpjkbjst7pbqoia7ai5h2ygrz2d5flq": {
     "hosts": [
       "132.145.82.24"
@@ -670,11 +464,10 @@
       "140.238.19.19"
     ]
   },
-  "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaasewcz3kgyqcat6a5np4qtesv437rs5sipchvyxoa5acapqusxxia": {
+  "ocid1.securitylist.oc1.ap-seoul-1.aaaaaaaaupdbfklymkn2v4mz44nchmriee2du22nqtemxed5bbj6jq5u5kiq": {
     "hosts": [
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30"
+      "140.238.16.245",
+      "140.238.11.90"
     ]
   },
   "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa2wfygwcobuw4wime64bhpakrzhzmzyvcsgteo2tnzo2xbnlswyuq": {
@@ -685,18 +478,6 @@
   "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa5wkoobs2tvvkxyovwq2vcfiypiypgi6l2755oghfj25g22snjpjq": {
     "hosts": [
       "140.238.2.225"
-    ]
-  },
-  "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa6lwxiioj7ruv4dbhaz43qrg2napdrzqtaxitujzzabhe5nn2ev7q": {
-    "hosts": [
-      "132.145.83.224"
-    ]
-  },
-  "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaao7en225czsxe7ghpqkypes6oe4nqy2sosu3clrjwi75catvx2ja": {
-    "hosts": [
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30"
     ]
   },
   "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaibx5uavohzqw4llfznmslt6ojxjyikoogpf3xpuvxsdhkauvd2tq": {
@@ -714,9 +495,10 @@
       "140.238.19.19"
     ]
   },
-  "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaunidt7axsg4n5d35d2q4pxprxe5jzcrzs55dazumdyp23spt62wq": {
+  "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaashzpqd7i6mkaw5jhk7q2po7iu3i6i326hybmpxohz6mmfwjrc7pa": {
     "hosts": [
-      "140.238.17.127"
+      "140.238.16.245",
+      "140.238.11.90"
     ]
   },
   "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaa3uj4xnjtwwxvy5dpthfumbp6y2gwqfvigmyy576xwjyjlqsyhukq": {
@@ -725,14 +507,6 @@
     ],
     "hosts": [
       "132.145.95.114"
-    ]
-  },
-  "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaa6l2uvdaxvoenuvmcajxdi6jtky6bjplklukhla5adjtuzelmyzjq": {
-    "children": [
-      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaunidt7axsg4n5d35d2q4pxprxe5jzcrzs55dazumdyp23spt62wq"
-    ],
-    "hosts": [
-      "140.238.17.127"
     ]
   },
   "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaabhtqtorx2n3vyvxcxvkjwx3kb6i3msllccldmrc62t4hfa4nwdoq": {
@@ -767,22 +541,13 @@
       "140.238.13.195"
     ]
   },
-  "ocid1.vcn.oc1.ap-seoul-1.amaaaaaavsea7yia2jejh5dm5ztafo23uflgqdaym4s226vtg52zggso6jvq": {
+  "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaaukm5hpzocgx34szykme6yem26bq2mn5i2rwcrkfnagntgmlng6ca": {
     "children": [
-      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaao7en225czsxe7ghpqkypes6oe4nqy2sosu3clrjwi75catvx2ja"
+      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaashzpqd7i6mkaw5jhk7q2po7iu3i6i326hybmpxohz6mmfwjrc7pa"
     ],
     "hosts": [
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30"
-    ]
-  },
-  "ocid1.vcn.oc1.ap-seoul-1.amaaaaaavsea7yiahb6xioj5xwgihrjftp7yfjmfsxg4kgwuw7mx4bdjk55q": {
-    "children": [
-      "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaa6lwxiioj7ruv4dbhaz43qrg2napdrzqtaxitujzzabhe5nn2ev7q"
-    ],
-    "hosts": [
-      "132.145.83.224"
+      "140.238.16.245",
+      "140.238.11.90"
     ]
   },
   "phillsoo.lim": {
@@ -794,22 +559,17 @@
     "children": [
       "fttO_AP-SEOUL-1-AD-1",
       "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaa3uj4xnjtwwxvy5dpthfumbp6y2gwqfvigmyy576xwjyjlqsyhukq",
+      "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaaukm5hpzocgx34szykme6yem26bq2mn5i2rwcrkfnagntgmlng6ca",
       "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaaedbpwe6p4pr7fbszhe5va46rfyefo5wwptljxphe6dtzjibo6pka",
-      "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaa6l2uvdaxvoenuvmcajxdi6jtky6bjplklukhla5adjtuzelmyzjq",
-      "ocid1.vcn.oc1.ap-seoul-1.amaaaaaavsea7yia2jejh5dm5ztafo23uflgqdaym4s226vtg52zggso6jvq",
-      "ocid1.vcn.oc1.ap-seoul-1.amaaaaaavsea7yiahb6xioj5xwgihrjftp7yfjmfsxg4kgwuw7mx4bdjk55q",
       "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaadzot47ckcw5fdowa5fdtscql4e5y6hb2ycqx7ltxoyay3vvifnrq",
       "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaafr2mlprldx3zh4wwapxvhlxck42dgvqzvd5jpt6cgbj6u3sv3p6q",
       "ocid1.vcn.oc1.ap-seoul-1.aaaaaaaabhtqtorx2n3vyvxcxvkjwx3kb6i3msllccldmrc62t4hfa4nwdoq"
     ],
     "hosts": [
       "132.145.95.114",
+      "140.238.16.245",
+      "140.238.11.90",
       "140.238.19.19",
-      "140.238.17.127",
-      "140.238.14.75",
-      "140.238.18.25",
-      "132.145.94.30",
-      "132.145.83.224",
       "132.145.82.24",
       "140.238.13.195",
       "140.238.2.225"
