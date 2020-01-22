@@ -22,12 +22,10 @@
 
 ### 실습 환경준비
 1. 실습 환경(Linux)에 접속하기 위한 RSA Key Pair 다운로드 후 압축을 해제합니다.
-    > https://objectstorage.ap-seoul-1.oraclecloud.com/p/q5QvhgdGpV5hakDgZXzjS-acLFR8oa3knciiVSS8CPg/n/apackrsct01/b/bucket-20190614-1639/o/sshkeys.zip
-
-    Windows 사용자의 경우 putty를 사용합니다. 아래 경로에서 다운로드 받습니다.
-    > https://objectstorage.ap-seoul-1.oraclecloud.com/p/3wkXVpnrGozrXsSHZLPvpGHxgFBB_yK5nphjF8iaPPY/n/apackrsct01/b/bucket-20190614-1639/o/putty.exe
+    > 본 핸즈온 교육은 종료되었습니다.
  
 2. 아래 URL로 접속해서 본인 이메일을 입력한 후 제출을 클릭하면 실습 환경정보를 확인할 수 있습니다.
+    > 본 핸즈온 교육은 종료되었습니다.
 
 3. 클라이언트 환경 접속
 
@@ -71,9 +69,8 @@ Terraform 실습에서는 Compartment 1개, Virtual Cloud Network(가상 클라�
 
 ![](images/scenario_terraform.png)
 
-
-> 실습 환경에는 이미 Terraform이 설치되어 제공됩니다.  
-> Terraform 설치와 관련해서는 아래 URL을 참고합니다.  
+> 실습 환경에는 Terraform이 설치되어 제공됩니다.  
+> Terraform 설치는 아래 URL을 참고합니다.  
 > https://learn.hashicorp.com/terraform/getting-started/install.html
 
   * Terraform 설치 확인
@@ -89,24 +86,25 @@ OCI용 테라폼 프로젝트의 디렉토리 구조는 다음과 같습니다.
   $ cd meetup-200118-iac/terraform
   ```
 
-제공되는 샘플은 루트 경로에 provider.tf, main.tf, vars.tf가 존재하고 이를 사용해서 하위 모듈을 실행하는 형태로 구성되어 있습니다.
-1. OCI provider 정의
+제공되는 샘플은 루트 경로에 provider.tf, main.tf, vars.tf가 존재하고 하위 폴더에 모듈을 구성해서 각 모듈을 실행하는 형태로 구성되어 있습니다.
+
+![](images/terraform_sample_structure.png)
+
+위 이미지의 내용은 다음과 같습니다.
+1. OCI provider를 정의
 2. terraform에서 사용할 변수 값을 정의하고 루트의 vars.tf에 값을 매핑
 3. 실행할 모듈을 정의 (모듈로 변수값 전달)
 4. 모듈별로 resource 정의
 
-![](images/terraform_sample_structure.png)
+> Terraform의 변수는 기본적으로 환경변수 혹은 tfvars 파일에 정의한 값이 할당되는데, 할당된 변수값은 동일한 폴더 위치의 Block (resource, data등)에서 참조합니다. 따라서 상위 폴더의 변수의 값을 하위 모듈로 전달해야 하며, 하위 모듈의 경우도 동일하게 전달받을 변수를 가지고 있어야 합니다.
 
-> Terraform의 변수는 기본적으로 환경변수 혹은 tfvars 파일에 정의한 값이 할당되는데, 할당된 변수값은 같은 위치의 Block Type (resource, data등)에서 참조합니다. 따라서 상위 변수의 값을 하위 모듈에 다시 매핑을 해야 하며, 하위 모듈의 경우도 동일하게 변수를 가지고 있어야 합니다.
+![](images/terraform_sample_var_explain.png)
 
 변수가 사용되는 방식은 다음과 같습니다.
 1. env.tfvars에 정의된 값을 루트의 vars.tf에 할당
 2. 루트의 vars.tf를 main.tf, provider.tf에서 사용
 3. 루트의 main.tf에서 하위 모듈(compute, compartment, vcn)이 가지고 있는 vars.tf에 값을 전달
 4. 각 모듈에서 동일한 위치에 존재하는 vars.tf 참조
-
-![](images/terraform_sample_var_explain.png)
-
 
 ### Terraform Init
 이 작업은 provider에서 제공하는 terraform plugin을 OS환경에 맞게 다운로드 혹은 업데이트하며, 실행할 모듈의 정보에 대한 내용을 json파일로 생성합니다.
@@ -142,7 +140,7 @@ Terraform Plan을 실행하면 작성한 계획에 따라 정확히 수행되는
     ```
 
 ### Terraform Apply
-실제로 인프라에 Terraform에 구성한 계획을 실행합니다.
+실제로 인프라에 Terraform으로 구성한 계획을 실행합니다.
 
 1. 동일한 경로에서 다음과 같이 수행합니다. 마찬가지로 **{os_user}** 부분을 자신의 os userid(e.g. user1)로 지정합니다.
 
